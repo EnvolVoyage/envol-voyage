@@ -52,8 +52,8 @@ export default function Confidentialite() {
             3. Consentement et désabonnement
           </h2>
           <p className="mt-2">
-            Votre inscription repose sur un consentement exprès (case à cocher
-            non précochée) confirmé par un double opt-in. Chaque courriel
+            Votre inscription repose sur un consentement exprès : une case à
+            cocher non précochée, dont la date est enregistrée. Chaque courriel
             contient un lien de désabonnement fonctionnel ; vous pouvez vous
             retirer en tout temps, sans frais.
           </p>
@@ -66,8 +66,8 @@ export default function Confidentialite() {
           <p className="mt-2">
             Votre adresse est conservée par notre fournisseur d&apos;envoi de
             courriels (MailerLite) tant que vous restez abonné, puis supprimée
-            sur demande de retrait. Une preuve de consentement est conservée
-            conformément à la LCAP.
+            sur demande de retrait. La preuve du consentement (date de la case
+            cochée) est conservée conformément à la LCAP.
           </p>
         </section>
 

@@ -61,6 +61,12 @@
 - **Fichiers** : `README.md` (réécrit), `.env.example` (créé)
 - **Pourquoi** : le README était le boilerplate `create-next-app` ; documentation du setup MailerLite et de l'identité.
 
+## 8. Opt-in — démarrage en simple opt-in (double = ajout futur)
+
+- **Fichiers** : `app/api/newsletter-subscribe/route.ts`, `app/confidentialite/page.tsx`
+- **Décision (Edouard)** : démarrer en **simple opt-in** (`status: "active"`) pour maximiser le volume au lancement. Le **double opt-in** reste recommandé pour la délivrabilité (défi #3) et sera **ajouté plus tard**.
+- **Réactiver le double opt-in (≈2 min)** : dans `route.ts`, remettre `status: "unconfirmed"`, activer le double opt-in dans le compte MailerLite, et restaurer le message de succès « Vérifiez votre boîte courriel pour confirmer ». La case de consentement (preuve CASL) reste en place dans les deux cas.
+
 ---
 
 ## Points en suspens (non bloquants)

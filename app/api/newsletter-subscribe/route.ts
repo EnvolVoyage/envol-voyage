@@ -65,9 +65,11 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         email,
-        // Force le double opt-in côté API (indépendant du réglage du compte) :
-        // MailerLite envoie alors le courriel de confirmation, requis par CASL.
-        status: "unconfirmed",
+        // Simple opt-in : l'abonné est ajouté directement (status "active").
+        // POUR ACTIVER LE DOUBLE OPT-IN PLUS TARD (recommandé pour la délivrabilité) :
+        // remplacer par status: "unconfirmed" ET activer le double opt-in dans MailerLite,
+        // puis remettre le message de succès "Vérifiez votre boîte courriel" ci-dessous.
+        status: "active",
         ...(groupId ? { groups: [groupId] } : {}),
       }),
     });
@@ -77,7 +79,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "Presque terminé ! Vérifiez votre boîte courriel pour confirmer votre inscription.",
+            "Merci ! Vous êtes inscrit aux aubaines d'Envol Voyage.",
         },
         { status: 200 }
       );
