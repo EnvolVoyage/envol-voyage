@@ -550,7 +550,7 @@
     'use strict';
 
     // ---- Configuration --------------------------------------------------------
-    const SIMULATE = true; // ⚠️ Passer à false une fois l'endpoint /api branché.
+    const SIMULATE = false; // endpoint /api/newsletter-subscribe branché sur MailerLite.
     const ENDPOINT = '/api/newsletter-subscribe';
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -604,8 +604,8 @@
           <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-carmin shadow-seal mb-4">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M22 3 2.6 10.4c-.9.34-.83 1.65.1 1.9l6.4 1.7 1.7 6.4c.25.93 1.56 1 1.9.1L22 3Z" fill="#fff"/></svg>
           </span>
-          <h3 class="font-display font-bold text-navy text-2xl">Excellent choix&nbsp;!</h3>
-          <p class="mt-3 text-navy/75 max-w-sm mx-auto">Vous êtes à un clic du départ. Vérifiez votre boîte de réception (et vos indésirables) pour confirmer votre inscription.</p>
+          <h3 class="font-display font-bold text-navy text-2xl">Bienvenue à bord&nbsp;!</h3>
+          <p class="mt-3 text-navy/75 max-w-sm mx-auto">Votre inscription est confirmée. Dès qu'une vraie aubaine décolle du Québec, elle atterrit dans votre boîte courriel.</p>
         </div>`;
     }
 
