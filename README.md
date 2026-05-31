@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Envol Voyage
 
-## Getting Started
+Landing page de l'infolettre **Envol Voyage** — aubaines de vols au départ du Québec, livrées par courriel. Nos algorithmes surveillent les prix aériens en continu et alertent les abonnés dès qu'une vraie aubaine apparaît. L'abonné réserve lui-même, directement chez la compagnie aérienne.
 
-First, run the development server:
+> **Envol Voyage n'est pas une agence de voyage.** Aucun billet n'est vendu. Service 100 % gratuit, financé par affiliation.
+
+## Stack
+
+- **Next.js 16** (App Router) + React 19
+- **Tailwind CSS v4** (tokens de marque définis dans `app/globals.css`)
+- **MailerLite** comme source de vérité des abonnés (email-only + double opt-in)
+
+## Démarrage
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # puis remplir les clés MailerLite
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Sans clé MailerLite, la page s'affiche normalement mais le formulaire renvoie une erreur explicite (« service non configuré ») — c'est attendu.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Voir `.env.example`. La clé `MAILERLITE_API_KEY` est lue **côté serveur uniquement** (dans `app/api/newsletter-subscribe/route.ts`) — jamais exposée au navigateur. Ne jamais committer de vraie clé (`.env.local` est dans `.gitignore`).
 
-## Learn More
+## Identité visuelle
 
-To learn more about Next.js, take a look at the following resources:
+| Rôle | Couleur |
+|---|---|
+| Fond | Crème `#F7F4EE` |
+| Texte / titres | Navy `#1A2942` |
+| Accents | Teal `#76A5AF` |
+| Fonds de cartes / séparateurs | Cyan grisé `#A3C1C7` |
+| CTA / alertes | Carmin `#BA1B2B` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Typo : **Poppins** (titres) + **Inter** (corps).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Historique des modifications de recadrage
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Le dossier [`docs-modifications/`](./docs-modifications/) journalise tous les changements apportés pour aligner le projet sur le cadrage produit (et comment les annuler au besoin).

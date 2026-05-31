@@ -1,74 +1,84 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
-  const [motDePasse, setMotDePasse] = useState("");
-  const [villeDepart, setVilleDepart] = useState("");
+  const [consent, setConsent] = useState(false);
   const [message, setMessage] = useState("");
+  const [erreur, setErreur] = useState(false);
   const [enCours, setEnCours] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setEnCours(true);
-    setMessage("Création du compte...");
+    setMessage("");
+    setErreur(false);
 
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: motDePasse,
-      options: {
-        data: { ville_depart: villeDepart },
-      },
-    });
+    try {
+      const res = await fetch("/api/newsletter-subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, consent }),
+      });
+      const data = await res.json();
 
-    if (error) {
-      setMessage("Erreur : " + error.message);
-    } else {
-      setMessage("Bienvenue ! Votre compte est créé.");
-      setEmail("");
-      setMotDePasse("");
-      setVilleDepart("");
+      if (!res.ok) {
+        setErreur(true);
+        setMessage(data.error ?? "Une erreur est survenue.");
+      } else {
+        setMessage(data.message ?? "Inscription reçue.");
+        setEmail("");
+        setConsent(false);
+      }
+    } catch {
+      setErreur(true);
+      setMessage("Une erreur réseau est survenue. Réessayez.");
+    } finally {
+      setEnCours(false);
     }
-    setEnCours(false);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full max-w-md">
-      <input
-        type="email"
-        placeholder="Votre courriel"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe (6 caractères min.)"
-        value={motDePasse}
-        onChange={(e) => setMotDePasse(e.target.value)}
-        required
-        minLength={6}
-        className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
-      />
-      <input
-        type="text"
-        placeholder="Ville de départ (ex: Montréal)"
-        value={villeDepart}
-        onChange={(e) => setVilleDepart(e.target.value)}
-        className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
-      />
-      <button
-        type="submit"
-        disabled={enCours}
-        className="w-full rounded-lg bg-cyan-500 px-6 py-3 font-semibold text-white transition hover:bg-cyan-400 disabled:opacity-50 cursor-pointer"
-      >
-        {enCours ? "Patientez..." : "Recevoir les alertes"}
-      </button>
+    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <input
+          type="email"
+          placeholder="votre@courriel.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          aria-label="Votre adresse courriel"
+          className="w-full flex-1 rounded-lg border border-navy/15 bg-white px-4 py-3 text-navy placeholder-navy/40 outline-none transition focus:border-teal focus:ring-2 focus:ring-teal/40"
+        />
+        <button
+          type="submit"
+          disabled={enCours}
+          className="rounded-lg bg-carmin px-6 py-3 font-semibold text-cream transition hover:bg-carmin/90 disabled:opacity-50"
+        >
+          {enCours ? "Un instant…" : "Recevoir les aubaines"}
+        </button>
+      </div>
+
+      <label className="flex items-start gap-2 text-left text-xs text-navy/60">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          required
+          className="mt-0.5 h-4 w-4 shrink-0 accent-teal"
+        />
+        <span>
+          J&apos;accepte de recevoir les aubaines de vols d&apos;Envol Voyage par
+          courriel. Je peux me désabonner en tout temps.
+        </span>
+      </label>
+
       {message && (
-        <p className={`text-sm text-center ${message.startsWith("Erreur") ? "text-red-400" : "text-emerald-400"}`}>
+        <p
+          className={`text-sm ${erreur ? "text-carmin" : "text-teal"}`}
+          role="status"
+        >
           {message}
         </p>
       )}

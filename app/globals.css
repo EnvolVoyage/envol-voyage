@@ -1,19 +1,26 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-}
-
+/* ===== Tokens de marque Envol Voyage — « tech-éditorial chaud » ===== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: #f7f4ee; /* fond global — papier de l'enveloppe */
+  --color-navy: #1a2942; /* texte fort, titres, sections sombres */
+  --color-teal: #76a5af; /* accents, icônes, succès */
+  --color-cyan-grise: #a3c1c7; /* fonds de cartes, séparateurs */
+  --color-carmin: #ba1b2b; /* CTA principal, badges alerte — le sceau du logo */
+
+  --font-titre: var(--font-poppins);
+  --font-corps: var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-navy);
+  font-family: var(--font-corps), "Helvetica Neue", Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-titre {
+  font-family: var(--font-titre), var(--font-corps), sans-serif;
 }
