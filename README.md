@@ -1,41 +1,46 @@
 # Envol Voyage
 
-Landing page de l'infolettre **Envol Voyage** — aubaines de vols au départ du Québec, livrées par courriel. Nos algorithmes surveillent les prix aériens en continu et alertent les abonnés dès qu'une vraie aubaine apparaît. L'abonné réserve lui-même, directement chez la compagnie aérienne.
+Landing page de l'infolettre **Envol Voyage** — aubaines de vols au départ du Québec, livrées par courriel. Nos systèmes surveillent les prix aériens en continu et alertent les abonnés dès qu'une vraie aubaine apparaît. L'abonné réserve lui-même, directement chez la compagnie aérienne.
 
-> **Envol Voyage n'est pas une agence de voyage.** Aucun billet n'est vendu. Service 100 % gratuit, financé par affiliation.
+> **Envol Voyage n'est pas une agence de voyage.** Aucun billet n'est vendu. Service 100 % gratuit.
 
 ## Stack
 
-- **Next.js 16** (App Router) + React 19
-- **Tailwind CSS v4** (tokens de marque définis dans `app/globals.css`)
-- **MailerLite** comme source de vérité des abonnés (email-only + double opt-in)
+**Site statique** — zéro build :
+- `index.html` à la racine (sert d'accueil)
+- `assets/` — images (logo + photos de destinations)
+- Tailwind CSS + polices (Poppins/Inter) via CDN
+- Déployé sur **Vercel** (config dans `vercel.json` : `framework: null`, aucun build, racine servie telle quelle)
 
-## Démarrage
+## Développement local
+
+Aucune dépendance à installer. Pour prévisualiser :
 
 ```bash
-npm install
-cp .env.example .env.local   # puis remplir les clés MailerLite
-npm run dev                  # http://localhost:3000
+python3 -m http.server 8000   # puis http://localhost:8000
 ```
 
-Sans clé MailerLite, la page s'affiche normalement mais le formulaire renvoie une erreur explicite (« service non configuré ») — c'est attendu.
+ou ouvrez simplement `index.html` dans un navigateur.
 
-## Variables d'environnement
+## Formulaire d'inscription
 
-Voir `.env.example`. La clé `MAILERLITE_API_KEY` est lue **côté serveur uniquement** (dans `app/api/newsletter-subscribe/route.ts`) — jamais exposée au navigateur. Ne jamais committer de vraie clé (`.env.local` est dans `.gitignore`).
+Le formulaire est en **mode prototype** (`SIMULATE = true` dans le `<script>` en bas de `index.html`) : il simule un succès sans appel réseau.
+
+**Pour le brancher en production :**
+1. Mettre en place un endpoint `POST /api/newsletter-subscribe` (fonction serverless — voir l'historique git, commit `8780814`, pour une implémentation Next.js de référence ; à porter en fonction Vercel autonome pour rester sans build).
+2. Passer `SIMULATE = false`.
+3. L'endpoint ajoute le contact au groupe MailerLite « Envol Voyage – Newsletter » (clé API **côté serveur uniquement**).
+
+## À compléter avant lancement public
+
+- **Adresse postale réelle** dans le footer (placeholder actuel : `1234, rue de la Montagne…`) — exigence LCAP/CASL.
+- **Liens légaux** (`href="#"`) : politique de confidentialité, conditions, contact.
+- **Tailwind compilé** (le CDN n'est pas recommandé en prod).
 
 ## Identité visuelle
 
-| Rôle | Couleur |
-|---|---|
-| Fond | Crème `#F7F4EE` |
-| Texte / titres | Navy `#1A2942` |
-| Accents | Teal `#76A5AF` |
-| Fonds de cartes / séparateurs | Cyan grisé `#A3C1C7` |
-| CTA / alertes | Carmin `#BA1B2B` |
+Crème `#F7F4EE` · Navy `#1A2942` · Teal `#76A5AF` · Cyan grisé `#A3C1C7` · Carmin `#BA1B2B`. Typo : Poppins (titres) + Inter (corps).
 
-Typo : **Poppins** (titres) + **Inter** (corps).
+## Historique
 
-## Historique des modifications de recadrage
-
-Le dossier [`docs-modifications/`](./docs-modifications/) journalise tous les changements apportés pour aligner le projet sur le cadrage produit (et comment les annuler au besoin).
+Le dossier [`docs-modifications/`](./docs-modifications/) journalise l'évolution du projet (recadrage initial, puis remplacement par ce site statique) et comment revenir en arrière.

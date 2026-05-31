@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Envol Voyage — Les meilleures aubaines de billets d'avion au départ du Québec</title>
+  <meta name="description" content="Recevez gratuitement par courriel les meilleures aubaines de billets d'avion au départ du Québec. Sans frais cachés, sans intermédiaire." />
+
+  <!-- ============================ FONTS ============================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ============================ TAILWIND ============================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:  '#F7F4EE',
+            navy:   '#1A2942',
+            teal:   '#76A5AF',
+            cyan:   '#A3C1C7',
+            carmin: '#BA1B2B',
+            paper:  '#FBF7EF',
+            sand:   '#ECE5D8',
+          },
+          fontFamily: {
+            display: ['Poppins', 'sans-serif'],
+            sans:    ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            soft:  '0 10px 30px -12px rgba(26,41,66,0.18), 0 4px 12px -6px rgba(26,41,66,0.10)',
+            lift:  '0 24px 60px -20px rgba(26,41,66,0.30), 0 8px 20px -10px rgba(26,41,66,0.14)',
+            seal:  '0 2px 8px -1px rgba(186,27,43,0.45)',
+          },
+        },
+      },
+    };
+  </script>
+  <!-- Silence the benign "ResizeObserver loop" notice (host/CDN noise, not app logic). -->
+  <script>
+    window.addEventListener('error', function (e) {
+      if (e.message && e.message.indexOf('ResizeObserver loop') !== -1) {
+        e.stopImmediatePropagation();
+      }
+    });
+  </script>
+
+  <!-- ============================ STYLES ============================ -->
+  <style>
+    :root { --header-h: 68px; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F7F4EE;
+      color: #1A2942;
+      /* Faint paper grain — evokes the textured envelope of the logo. */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+    h1,h2,h3,h4,.font-display { font-family: 'Poppins', sans-serif; }
+
+    /* Visible, consistent keyboard focus everywhere (WCAG 2.4.7). */
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    summary:focus-visible, [tabindex]:focus-visible {
+      outline: 3px solid #76A5AF;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+    .cta:focus-visible { outline-color: #1A2942; }
+
+    /* Honeypot — off-screen, hidden from AT, never focusable for humans. */
+    .hp-field {
+      position: absolute; left: -9999px; top: -9999px;
+      width: 1px; height: 1px; overflow: hidden;
+    }
+
+    /* FAQ accordion (<details>/<summary>) */
+    details summary { list-style: none; cursor: pointer; }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] .faq-chevron { transform: rotate(180deg); }
+    .faq-chevron { transition: transform 0.25s ease; }
+    details[open] .faq-answer { animation: faqIn 0.28s ease; }
+    @keyframes faqIn { from { opacity: 0; transform: translateY(-4px);} to {opacity:1; transform:none;} }
+
+    /* Hero alert-card float */
+    @keyframes floaty { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-10px);} }
+    .floaty { animation: floaty 6s ease-in-out infinite; }
+
+    /* Live-valid check fade */
+    .valid-check { opacity: 0; transform: scale(0.6); transition: opacity .2s ease, transform .2s ease; }
+    .is-valid .valid-check { opacity: 1; transform: scale(1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .floaty { animation: none; }
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    }
+  </style>
+</head>
+
+<body class="antialiased text-[16px] leading-relaxed">
+
+  <!-- Aperçu utilisé par le bundler hors-ligne (enveloppe + avion origami) -->
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="#1A2942"/>
+      <rect x="32" y="40" width="36" height="24" rx="3" fill="#F7F4EE"/>
+      <path d="M32 42 50 55 68 42" fill="none" stroke="#A3C1C7" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M67 29 43 41l7 2 2 7 15-21Z" fill="#76A5AF"/>
+      <circle cx="67" cy="30" r="3.2" fill="#BA1B2B"/>
+    </svg>
+  </template>
+
+  <!-- Skip link for keyboard / screen-reader users -->
+  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-3 focus:left-3 focus:bg-navy focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold">Aller au contenu</a>
+
+  <!-- ============================================================= -->
+  <!-- HEADER                                                        -->
+  <!-- ============================================================= -->
+  <header class="sticky top-0 z-40 bg-cream/85 backdrop-blur-md border-b border-cyan/40">
+    <nav class="mx-auto max-w-6xl px-5 sm:px-8 h-[68px] flex items-center justify-between" aria-label="Navigation principale">
+      <!-- Brand -->
+      <a href="#hero" class="flex items-center gap-2.5 group" aria-label="Envol Voyage — accueil">
+        <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-paper ring-1 ring-navy/10 shadow-soft overflow-hidden shrink-0">
+          <img src="assets/envol-mark.png" alt="" width="44" height="44" class="h-full w-full object-cover scale-110" />
+        </span>
+        <span class="font-display font-bold text-navy text-lg tracking-tight">Envol&nbsp;Voyage</span>
+      </a>
+
+      <!-- Right side: FAQ + S'inscrire (no leaky menu) -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a href="#faq" class="font-semibold text-navy/80 hover:text-navy px-3 py-2 rounded-lg transition-colors">FAQ</a>
+        <a href="#inscription" class="font-display font-semibold text-sm sm:text-base text-navy border border-navy/25 hover:bg-navy hover:text-white px-4 py-2 rounded-xl transition-colors duration-200 shadow-soft">S'inscrire</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="hero">
+    <!-- ============================================================= -->
+    <!-- HERO                                                          -->
+    <!-- ============================================================= -->
+    <section id="inscription" class="relative overflow-hidden" style="scroll-margin-top: var(--header-h);">
+      <!-- soft ambient glow -->
+      <div aria-hidden="true" class="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-cyan/30 blur-3xl"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute top-40 -left-32 h-80 w-80 rounded-full bg-teal/20 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-6xl px-5 sm:px-8 pt-14 pb-16 lg:pt-20 lg:pb-24 grid lg:grid-cols-[1.12fr_0.88fr] gap-12 lg:gap-12 items-center">
+        <!-- Copy + form -->
+        <div>
+          <p class="inline-flex items-center gap-2 rounded-full bg-white/70 border border-cyan/60 px-3.5 py-1.5 text-sm font-semibold text-navy/80 shadow-soft">
+            <span class="h-2 w-2 rounded-full bg-carmin"></span>
+            Infolettre gratuite · Départs du Québec
+          </p>
+
+          <h1 class="mt-5 font-display font-bold text-navy tracking-tight text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+            Ne payez plus jamais le plein prix pour vos vols.
+          </h1>
+
+          <p class="mt-5 text-lg text-navy/75 max-w-xl text-pretty">
+            Recevez gratuitement les meilleures aubaines de billets d'avion au départ du Québec, directement dans votre courriel. Sans frais cachés, sans intermédiaire.
+          </p>
+
+          <!-- ===================================================== -->
+          <!-- NEWSLETTER FORM — branchement MailerLite              -->
+          <!-- Wrapper #mailerlite-form-container : repère d'intégration -->
+          <!-- ===================================================== -->
+          <div id="mailerlite-form-container" class="mt-8 max-w-xl">
+            <div class="rounded-2xl bg-white shadow-lift border border-cyan/40 p-5 sm:p-6">
+              <form class="newsletter-form" data-source="hero" novalidate>
+                <label for="email-hero" class="block font-semibold text-navy mb-2">Adresse courriel</label>
+                <div class="relative">
+                  <input
+                    id="email-hero" name="email" type="email" inputmode="email" autocomplete="email" required
+                    placeholder="Entrez votre adresse courriel…"
+                    aria-describedby="msg-hero"
+                    class="w-full rounded-xl border border-navy/20 bg-cream/40 px-4 py-3.5 pr-11 text-navy placeholder:text-navy/40 focus:bg-white focus:border-teal outline-none transition-colors" />
+                  <!-- live-valid check (also announced, not colour-only) -->
+                  <span class="valid-check absolute right-3 top-1/2 -translate-y-1/2 text-teal" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#76A5AF"/><path d="m8 12.5 2.5 2.5L16 9.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+
+                <!-- Consent — NON pré-cochée (LCAP / Loi 25) -->
+                <label class="mt-4 flex items-start gap-3 cursor-pointer select-none">
+                  <input type="checkbox" name="consent_marketing" required
+                    class="mt-0.5 h-5 w-5 shrink-0 rounded border-navy/30 text-carmin accent-carmin focus:ring-2 focus:ring-teal cursor-pointer" />
+                  <span class="text-sm text-navy/75 leading-snug">J'accepte de recevoir les aubaines par courriel et la <a href="#" class="underline decoration-teal underline-offset-2 hover:text-navy font-medium">Politique de confidentialité</a>.</span>
+                </label>
+
+                <!-- Honeypot anti-bot (laisser vide) -->
+                <div class="hp-field" aria-hidden="true">
+                  <label for="website-hero">Ne pas remplir</label>
+                  <input id="website-hero" name="website" type="text" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <!-- Champs cachés : métadonnées d'abonnement -->
+                <input type="hidden" name="source_page" value="" />
+                <input type="hidden" name="lang" value="fr" />
+                <input type="hidden" name="utm_source" value="" />
+                <input type="hidden" name="utm_medium" value="" />
+                <input type="hidden" name="utm_campaign" value="" />
+                <input type="hidden" name="consent_version" value="2026-05-v1" />
+                <input type="hidden" name="submitted_at" value="" />
+
+                <!-- Emplacement Turnstile / reCAPTCHA (à activer en production) -->
+                <div class="cf-turnstile mt-3" data-sitekey="VOTRE_CLE_PUBLIQUE_ICI" hidden></div>
+
+                <button type="submit" class="cta mt-4 w-full rounded-xl bg-carmin px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft hover:brightness-110 active:translate-y-px transition disabled:opacity-60">
+                  M'inscrire gratuitement
+                </button>
+
+                <p class="mt-3 text-center text-sm text-navy/55">100&nbsp;% gratuit. Désabonnement en un clic.</p>
+
+                <!-- Zone de message (erreur / live region) -->
+                <p id="msg-hero" class="form-msg mt-2 text-sm font-medium hidden" role="alert"></p>
+              </form>
+            </div>
+
+            <!-- Trust row -->
+            <ul class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-navy/65">
+              <li class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="#76A5AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Aucun frais caché</li>
+              <li class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="#76A5AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Désabonnement en un clic</li>
+              <li class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="#76A5AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Conforme Loi&nbsp;25 &amp; LCAP</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Visuel destination : photo libre de droit de Lisbonne (format paysage compact) -->
+        <div class="relative hidden lg:flex items-center justify-center">
+          <div class="relative w-full max-w-[22rem]">
+            <div class="relative rounded-[1.75rem] overflow-hidden shadow-lift ring-1 ring-navy/10 aspect-[4/3]">
+              <img src="assets/lisbon.png"
+                   alt="La place du Commerce et l'arc de la Rua Augusta à Lisbonne, Portugal."
+                   class="h-full w-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-transparent"></div>
+              <span class="absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-cream/90 px-3 py-1.5 text-xs font-semibold text-navy/70">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/><circle cx="12" cy="10" r="2.2" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/></svg>
+                Lisbonne, Portugal
+              </span>
+            </div>
+            <!-- pastille d'aubaine (indice produit, décoratif) -->
+            <div aria-hidden="true" class="floaty absolute -bottom-7 -left-7 w-56 rounded-2xl bg-navy text-cream shadow-lift px-5 py-4">
+              <div class="flex items-center gap-2 text-xs text-cyan"><span class="h-2 w-2 rounded-full bg-carmin"></span>Alerte aubaine</div>
+              <p class="mt-1.5 font-display font-semibold">Montréal → Lisbonne</p>
+              <div class="mt-1 flex items-baseline gap-2">
+                <span class="text-cyan/60 line-through text-sm">925&nbsp;$</span>
+                <span class="font-display font-bold text-cream text-2xl">412&nbsp;$</span>
+                <span class="rounded-md bg-carmin text-white text-[11px] font-bold px-1.5 py-0.5">−55&nbsp;%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- FOMO / PREUVE SOCIALE                                         -->
+    <!-- ============================================================= -->
+    <section class="mx-auto max-w-6xl px-5 sm:px-8 py-16 lg:py-20" style="scroll-margin-top: var(--header-h);">
+      <div class="max-w-2xl">
+        <h2 class="font-display font-bold text-navy text-3xl sm:text-4xl tracking-tight">Le genre d'aubaines que vous ratez en ce moment</h2>
+        <p class="mt-3 text-navy/70 text-lg">Voici de véritables exemples de tarifs repérés par nos systèmes — le genre d'aubaines qui partent en quelques heures. Nos abonnés les reçoivent à temps.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Deal ticket card template -->
+        <article class="group relative rounded-2xl overflow-hidden shadow-soft ring-1 ring-navy/10 h-80 hover:shadow-lift transition-shadow">
+          <img src="assets/dest-paris.png" loading="lazy"
+               alt="La tour Eiffel et les toits de Paris au coucher du soleil."
+               class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-navy/5"></div>
+          <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-cream/90 px-3 py-1.5 text-xs font-semibold text-navy/70">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/><circle cx="12" cy="10" r="2.2" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/></svg>
+            Europe
+          </span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 text-cream">
+            <p class="font-display font-bold text-2xl">Montréal → Paris</p>
+            <div class="mt-2 flex items-baseline gap-3">
+              <span class="text-cream/60 line-through text-lg">850&nbsp;$</span>
+              <span class="font-display font-bold text-4xl">499&nbsp;$</span>
+              <span class="rounded-md bg-carmin text-white text-xs font-bold px-2 py-1">−41&nbsp;%</span>
+            </div>
+            <p class="mt-2 text-sm text-cream/70">Aller-retour, taxes incluses</p>
+          </div>
+        </article>
+
+        <article class="group relative rounded-2xl overflow-hidden shadow-soft ring-1 ring-navy/10 h-80 hover:shadow-lift transition-shadow">
+          <img src="assets/dest-cancun.png" loading="lazy"
+               alt="Plage des Caraïbes aux eaux turquoise près de Cancún."
+               class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-navy/5"></div>
+          <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-cream/90 px-3 py-1.5 text-xs font-semibold text-navy/70">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/><circle cx="12" cy="10" r="2.2" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/></svg>
+            Amérique
+          </span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 text-cream">
+            <p class="font-display font-bold text-2xl">Québec → Cancún</p>
+            <div class="mt-2 flex items-baseline gap-3">
+              <span class="text-cream/60 line-through text-lg">700&nbsp;$</span>
+              <span class="font-display font-bold text-4xl">250&nbsp;$</span>
+              <span class="rounded-md bg-carmin text-white text-xs font-bold px-2 py-1">−64&nbsp;%</span>
+            </div>
+            <p class="mt-2 text-sm text-cream/70">Aller-retour, taxes incluses</p>
+          </div>
+        </article>
+
+        <article class="group relative rounded-2xl overflow-hidden shadow-soft ring-1 ring-navy/10 h-80 hover:shadow-lift transition-shadow">
+          <img src="assets/dest-tokyo.png" loading="lazy"
+               alt="Rue de Tokyo illuminée la nuit avec la tour de Tokyo."
+               class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-navy/5"></div>
+          <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-cream/90 px-3 py-1.5 text-xs font-semibold text-navy/70">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/><circle cx="12" cy="10" r="2.2" stroke="#1A2942" stroke-opacity=".6" stroke-width="2.2"/></svg>
+            Asie
+          </span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 text-cream">
+            <p class="font-display font-bold text-2xl">Montréal → Tokyo</p>
+            <div class="mt-2 flex items-baseline gap-3">
+              <span class="text-cream/60 line-through text-lg">1&nbsp;500&nbsp;$</span>
+              <span class="font-display font-bold text-4xl">799&nbsp;$</span>
+              <span class="rounded-md bg-carmin text-white text-xs font-bold px-2 py-1">−47&nbsp;%</span>
+            </div>
+            <p class="mt-2 text-sm text-cream/70">Aller-retour, taxes incluses</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="mt-8 text-center text-navy/60">
+        <a href="#inscription" class="font-semibold text-navy underline decoration-teal underline-offset-4 hover:text-carmin transition-colors">Recevez la prochaine aubaine →</a>
+      </p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- COMMENT ÇA MARCHE                                             -->
+    <!-- ============================================================= -->
+    <section class="border-y border-cyan/40 bg-sand/55">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8 py-16 lg:py-20">
+        <div class="max-w-2xl">
+          <h2 class="font-display font-bold text-navy text-3xl sm:text-4xl tracking-tight">Comment ça marche</h2>
+          <p class="mt-3 text-navy/70 text-lg">Trois étapes simples, du repérage à l'embarquement.</p>
+        </div>
+
+        <ol class="mt-10 grid gap-8 md:grid-cols-3">
+          <li class="relative">
+            <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-teal/15 border border-teal/30">
+              <!-- radar / détection -->
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#76A5AF" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="#76A5AF" stroke-width="1.8"/><circle cx="12" cy="12" r="1.6" fill="#BA1B2B"/><path d="M12 12 19 6" stroke="#76A5AF" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <p class="mt-4 text-sm font-bold text-teal tracking-wider">ÉTAPE 1</p>
+            <h3 class="mt-1 font-display font-semibold text-navy text-xl">La détection</h3>
+            <p class="mt-2 text-navy/70">Nos systèmes surveillent en continu les tarifs aériens pour repérer erreurs de prix et baisses inattendues.</p>
+          </li>
+
+          <li class="relative">
+            <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-teal/15 border border-teal/30">
+              <!-- cloche / alerte -->
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z" stroke="#76A5AF" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 19a2 2 0 0 0 4 0" stroke="#76A5AF" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="6" r="3" fill="#BA1B2B"/></svg>
+            </div>
+            <p class="mt-4 text-sm font-bold text-teal tracking-wider">ÉTAPE 2</p>
+            <h3 class="mt-1 font-display font-semibold text-navy text-xl">L'alerte</h3>
+            <p class="mt-2 text-navy/70">Dès qu'une vraie aubaine est repérée, une alerte part instantanément à tous nos abonnés.</p>
+          </li>
+
+          <li class="relative">
+            <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-teal/15 border border-teal/30">
+              <!-- bouclier / réservation sécurisée -->
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" stroke="#76A5AF" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="#76A5AF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="mt-4 text-sm font-bold text-teal tracking-wider">ÉTAPE 3</p>
+            <h3 class="mt-1 font-display font-semibold text-navy text-xl">La réservation</h3>
+            <p class="mt-2 text-navy/70">Vous réservez vous-même, en toute sécurité, directement sur le site officiel de la compagnie.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- TRANSPARENCE / POSITIONNEMENT (section sombre navy)           -->
+    <!-- ============================================================= -->
+    <section class="relative overflow-hidden bg-navy text-cream">
+      <!-- compass-rose motif (logo DNA) -->
+      <svg aria-hidden="true" class="pointer-events-none absolute -right-16 -bottom-16 opacity-[0.07]" width="380" height="380" viewBox="0 0 100 100" fill="none">
+        <g stroke="#F7F4EE" stroke-width="0.8">
+          <circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="24"/>
+          <path d="M50 6 56 44 94 50 56 56 50 94 44 56 6 50 44 44Z" fill="#F7F4EE" fill-opacity="0.5"/>
+        </g>
+      </svg>
+      <div class="relative mx-auto max-w-4xl px-5 sm:px-8 py-16 lg:py-24 text-center">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-carmin shadow-seal mb-6">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <h2 class="font-display font-bold text-3xl sm:text-[2.6rem] leading-tight tracking-tight">Transparent. Indépendant. Sans frais cachés.</h2>
+        <p class="mt-6 text-lg sm:text-xl text-cyan leading-relaxed text-pretty">
+          Pendant que l'industrie traditionnelle verrouille ses meilleures offres derrière des abonnements coûteux, Envol Voyage partage l'intégralité de ses découvertes avec sa communauté. Nous ne sommes pas une agence de voyage et ne vendons aucun billet : nous vous redirigeons vers des plateformes certifiées. Les prix fluctuent vite — notre mission est de vous avertir le plus tôt possible.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- FAQ                                                           -->
+    <!-- ============================================================= -->
+    <section id="faq" class="mx-auto max-w-3xl px-5 sm:px-8 py-16 lg:py-24" style="scroll-margin-top: var(--header-h);">
+      <h2 class="font-display font-bold text-navy text-3xl sm:text-4xl tracking-tight text-center">Questions fréquentes</h2>
+
+      <div class="mt-10 space-y-4">
+        <details class="group rounded-2xl bg-paper border border-cyan/40 shadow-soft px-5 sm:px-6 open:shadow-lift transition-shadow">
+          <summary class="flex items-center justify-between gap-4 py-5 font-display font-semibold text-navy text-lg">
+            Comment ce service peut-il être gratuit ?
+            <svg class="faq-chevron shrink-0 text-teal" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p class="faq-answer pb-5 -mt-1 text-navy/70">Notre mission est de bâtir une communauté de voyageurs informés. L'accès aux aubaines est gratuit.</p>
+        </details>
+
+        <details class="group rounded-2xl bg-paper border border-cyan/40 shadow-soft px-5 sm:px-6 open:shadow-lift transition-shadow">
+          <summary class="flex items-center justify-between gap-4 py-5 font-display font-semibold text-navy text-lg">
+            Vendez-vous les billets d'avion ?
+            <svg class="faq-chevron shrink-0 text-teal" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p class="faq-answer pb-5 -mt-1 text-navy/70">Non. Envol Voyage est un service de curation d'information. L'achat se fait directement auprès des compagnies de confiance.</p>
+        </details>
+
+        <details class="group rounded-2xl bg-paper border border-cyan/40 shadow-soft px-5 sm:px-6 open:shadow-lift transition-shadow">
+          <summary class="flex items-center justify-between gap-4 py-5 font-display font-semibold text-navy text-lg">
+            Combien de temps les aubaines sont-elles valides ?
+            <svg class="faq-chevron shrink-0 text-teal" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <p class="faq-answer pb-5 -mt-1 text-navy/70">Les tarifs aériens changent à la minute ; une aubaine peut expirer en quelques heures. La réactivité à nos courriels est donc cruciale.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- SECOND CTA (bande navy)                                       -->
+    <!-- ============================================================= -->
+    <section class="bg-navy">
+      <div class="mx-auto max-w-2xl px-5 sm:px-8 py-16 lg:py-24 text-center">
+        <h2 class="font-display font-bold text-cream text-3xl sm:text-[2.6rem] leading-tight tracking-tight">Prêt à préparer vos valises ?</h2>
+        <p class="mt-4 text-cyan text-lg">Rejoignez les voyageurs qui partent au bon prix, sans y penser.</p>
+
+        <div id="mailerlite-form-container-2" class="mt-8 text-left">
+          <div class="rounded-2xl bg-cream shadow-lift p-5 sm:p-6">
+            <form class="newsletter-form" data-source="cta-bas" novalidate>
+              <label for="email-cta" class="block font-semibold text-navy mb-2">Adresse courriel</label>
+              <div class="relative">
+                <input
+                  id="email-cta" name="email" type="email" inputmode="email" autocomplete="email" required
+                  placeholder="Entrez votre adresse courriel…"
+                  aria-describedby="msg-cta"
+                  class="w-full rounded-xl border border-navy/20 bg-white px-4 py-3.5 pr-11 text-navy placeholder:text-navy/40 focus:border-teal outline-none transition-colors" />
+                <span class="valid-check absolute right-3 top-1/2 -translate-y-1/2 text-teal" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#76A5AF"/><path d="m8 12.5 2.5 2.5L16 9.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+
+              <label class="mt-4 flex items-start gap-3 cursor-pointer select-none">
+                <input type="checkbox" name="consent_marketing" required
+                  class="mt-0.5 h-5 w-5 shrink-0 rounded border-navy/30 text-carmin accent-carmin focus:ring-2 focus:ring-teal cursor-pointer" />
+                <span class="text-sm text-navy/75 leading-snug">J'accepte de recevoir les aubaines par courriel et la <a href="#" class="underline decoration-teal underline-offset-2 hover:text-navy font-medium">Politique de confidentialité</a>.</span>
+              </label>
+
+              <div class="hp-field" aria-hidden="true">
+                <label for="website-cta">Ne pas remplir</label>
+                <input id="website-cta" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <input type="hidden" name="source_page" value="" />
+              <input type="hidden" name="lang" value="fr" />
+              <input type="hidden" name="utm_source" value="" />
+              <input type="hidden" name="utm_medium" value="" />
+              <input type="hidden" name="utm_campaign" value="" />
+              <input type="hidden" name="consent_version" value="2026-05-v1" />
+              <input type="hidden" name="submitted_at" value="" />
+              <div class="cf-turnstile mt-3" data-sitekey="VOTRE_CLE_PUBLIQUE_ICI" hidden></div>
+
+              <button type="submit" class="cta mt-4 w-full rounded-xl bg-carmin px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft hover:brightness-110 active:translate-y-px transition disabled:opacity-60">
+                M'inscrire gratuitement
+              </button>
+              <p class="mt-3 text-center text-sm text-navy/55">100&nbsp;% gratuit. Désabonnement en un clic.</p>
+              <p id="msg-cta" class="form-msg mt-2 text-sm font-medium hidden" role="alert"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================= -->
+  <footer class="bg-navy text-cyan border-t border-white/10">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-12">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <a href="#hero" class="flex items-center gap-2.5" aria-label="Envol Voyage — haut de page">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 3 2.6 10.4c-.9.34-.83 1.65.1 1.9l6.4 1.7 1.7 6.4c.25.93 1.56 1 1.9.1L22 3Z" fill="#A3C1C7"/><path d="M22 3 9.2 14l1.5 6.5c.25.93 1.56 1 1.9.1L22 3Z" fill="#76A5AF"/></svg>
+          </span>
+          <span class="font-display font-bold text-cream text-lg">Envol&nbsp;Voyage</span>
+        </a>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label="Liens légaux">
+          <a href="#" class="hover:text-cream transition-colors py-1">Politique de confidentialité</a>
+          <a href="#" class="hover:text-cream transition-colors py-1">Conditions d'utilisation</a>
+          <a href="#" class="hover:text-cream transition-colors py-1">Nous contacter</a>
+        </nav>
+      </div>
+
+      <div class="mt-10 pt-8 border-t border-white/10 grid gap-6 sm:grid-cols-2 text-sm text-cyan/80">
+        <div>
+          <p class="font-semibold text-cream">Envol Voyage</p>
+          <!-- Adresse postale requise par la Loi canadienne anti-pourriel (LCAP / CASL) -->
+          <address class="not-italic mt-1 leading-relaxed">
+            1234, rue de la Montagne, bureau 200<br />
+            Montréal (Québec)  H3G 1Z2  Canada
+          </address>
+        </div>
+        <p class="leading-relaxed">
+          Envol Voyage respecte la Loi&nbsp;25 (protection des renseignements personnels) et la Loi canadienne anti-pourriel. Les tarifs annoncés sont exacts au moment de l'envoi de l'alerte et peuvent être modifiés sans préavis par les transporteurs.
+        </p>
+      </div>
+
+      <p class="mt-10 text-sm text-cyan/60">© 2026 Envol Voyage. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================================ -->
+  <!-- COMPOSANT : NewsletterForm_MailerLite                                        -->
+  <!-- ---------------------------------------------------------------------------- -->
+  <!-- Source de vérité des abonnés = MailerLite. Ce script gère la validation      -->
+  <!-- front-end, l'anti-spam (honeypot), les métadonnées et les états UX.          -->
+  <!--                                                                              -->
+  <!-- BRANCHEMENT PRODUCTION (à implémenter côté serveur) :                        -->
+  <!--   1. Le formulaire POST vers votre endpoint :  POST /api/newsletter-subscribe -->
+  <!--   2. L'endpoint (serveur) :                                                  -->
+  <!--        • valide l'email + rejoue l'anti-spam (Turnstile/reCAPTCHA + honeypot) -->
+  <!--        • crée/met à jour le contact dans le groupe MailerLite                 -->
+  <!--          « Envol Voyage – Newsletter » via l'API MailerLite.                  -->
+  <!--        • la CLÉ API MailerLite reste UNIQUEMENT côté serveur — jamais ici.    -->
+  <!--        • si l'email existe déjà : mise à jour propre, aucun doublon.          -->
+  <!--   3. DOUBLE OPT-IN OBLIGATOIRE : MailerLite envoie un courriel de             -->
+  <!--      confirmation. Tant que non confirmé, le contact reste « en attente ».    -->
+  <!--                                                                              -->
+  <!-- ADMINISTRATION : la gestion des abonnés se fait dans MailerLite (deux accès   -->
+  <!-- séparés). Aucun dashboard admin custom n'est construit ici.                  -->
+  <!--                                                                              -->
+  <!-- MODE PROTOTYPE : SIMULATE = true → succès simulé, aucun appel réseau réel.    -->
+  <!-- ============================================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    // ---- Configuration --------------------------------------------------------
+    const SIMULATE = true; // ⚠️ Passer à false une fois l'endpoint /api branché.
+    const ENDPOINT = '/api/newsletter-subscribe';
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    // ---- Helpers ---------------------------------------------------------------
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name) || '';
+    }
+
+    function fillHiddenMeta(form) {
+      const set = (n, v) => { const el = form.querySelector(`[name="${n}"]`); if (el) el.value = v; };
+      set('source_page', window.location.pathname + (form.dataset.source ? '#' + form.dataset.source : ''));
+      set('utm_source',   getParam('utm_source'));
+      set('utm_medium',   getParam('utm_medium'));
+      set('utm_campaign', getParam('utm_campaign'));
+    }
+
+    function showMessage(form, text, type) {
+      const msg = form.querySelector('.form-msg');
+      if (!msg) return;
+      msg.textContent = text;
+      msg.classList.remove('hidden');
+      msg.classList.toggle('text-carmin', type === 'error');
+      msg.classList.toggle('text-teal',   type !== 'error');
+    }
+    function clearMessage(form) {
+      const msg = form.querySelector('.form-msg');
+      if (msg) { msg.textContent = ''; msg.classList.add('hidden'); }
+    }
+
+    // ---- Appel d'abonnement (stub branchable) ----------------------------------
+    async function subscribeToMailerLite(payload) {
+      if (SIMULATE) {
+        // Simulation d'un aller-retour réseau réussi.
+        await new Promise(r => setTimeout(r, 700));
+        return { ok: true, status: 'pending' }; // pending = en attente du double opt-in
+      }
+      // PRODUCTION :
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Échec de l\'abonnement (' + res.status + ')');
+      return res.json();
+    }
+
+    // ---- État de succès (remplace le formulaire) -------------------------------
+    function renderSuccess(container) {
+      container.innerHTML = `
+        <div class="rounded-2xl bg-white shadow-lift border border-cyan/40 p-8 text-center" role="status">
+          <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-carmin shadow-seal mb-4">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M22 3 2.6 10.4c-.9.34-.83 1.65.1 1.9l6.4 1.7 1.7 6.4c.25.93 1.56 1 1.9.1L22 3Z" fill="#fff"/></svg>
+          </span>
+          <h3 class="font-display font-bold text-navy text-2xl">Excellent choix&nbsp;!</h3>
+          <p class="mt-3 text-navy/75 max-w-sm mx-auto">Vous êtes à un clic du départ. Vérifiez votre boîte de réception (et vos indésirables) pour confirmer votre inscription.</p>
+        </div>`;
+    }
+
+    // ---- Initialisation d'un formulaire ---------------------------------------
+    function initNewsletterForm(form) {
+      fillHiddenMeta(form);
+
+      const emailInput = form.querySelector('input[type="email"]');
+      const wrapper = emailInput.closest('.relative');
+
+      // Validation live : coche verte quand l'email est valide (+ aria).
+      emailInput.addEventListener('input', () => {
+        const valid = EMAIL_RE.test(emailInput.value.trim());
+        wrapper.classList.toggle('is-valid', valid);
+        emailInput.setAttribute('aria-invalid', valid ? 'false' : 'true');
+        if (valid) clearMessage(form);
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // 1) Honeypot : si rempli → bot, on ignore silencieusement.
+        const hp = form.querySelector('input[name="website"]');
+        if (hp && hp.value.trim() !== '') return;
+
+        // 2) Validations
+        const email = emailInput.value.trim();
+        const consent = form.querySelector('input[name="consent_marketing"]');
+        if (!EMAIL_RE.test(email)) {
+          showMessage(form, 'Veuillez entrer une adresse courriel valide.', 'error');
+          emailInput.setAttribute('aria-invalid', 'true');
+          emailInput.focus();
+          return;
+        }
+        if (consent && !consent.checked) {
+          showMessage(form, 'Veuillez cocher la case de consentement pour continuer.', 'error');
+          consent.focus();
+          return;
+        }
+        clearMessage(form);
+
+        // 3) Métadonnées finales
+        form.querySelector('[name="submitted_at"]').value = new Date().toISOString();
+        const payload = Object.fromEntries(new FormData(form).entries());
+        delete payload.website; // ne pas transmettre le honeypot
+
+        // 4) Soumission
+        const btn = form.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Inscription en cours…';
+
+        try {
+          await subscribeToMailerLite(payload);
+          const container = form.closest('[id^="mailerlite-form-container"]');
+          renderSuccess(container || form.parentElement);
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = original;
+          showMessage(form, 'Une erreur est survenue. Veuillez réessayer dans un instant.', 'error');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.newsletter-form').forEach(initNewsletterForm);
+    });
+  })();
+  </script>
+</body>
+</html>

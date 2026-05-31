@@ -67,6 +67,17 @@
 - **Décision (Edouard)** : démarrer en **simple opt-in** (`status: "active"`) pour maximiser le volume au lancement. Le **double opt-in** reste recommandé pour la délivrabilité (défi #3) et sera **ajouté plus tard**.
 - **Réactiver le double opt-in (≈2 min)** : dans `route.ts`, remettre `status: "unconfirmed"`, activer le double opt-in dans le compte MailerLite, et restaurer le message de succès « Vérifiez votre boîte courriel pour confirmer ». La case de consentement (preuve CASL) reste en place dans les deux cas.
 
+## 9. Remplacement complet : app Next.js → site statique (nouvelle version d'Edouard)
+
+- **Date** : 2026-05-31 (plus tard dans la journée).
+- **Quoi** : tout le projet Next.js (recadrage des entrées #1 à #8) est **remplacé** par un nouveau site statique fourni par Edouard (généré via Claude Design), bien plus abouti.
+- **Retiré** : `app/`, `public/`, `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.ts`, `eslint.config.mjs`, `postcss.config.mjs`, `AGENTS.md`, `CLAUDE.md` (toute la stack Next.js, dont la route API `/api/newsletter-subscribe`).
+- **Ajouté** : `index.html` (racine) + `assets/` (5 images) + `vercel.json` (déploiement statique, zéro build).
+- **Pourquoi** : nouvelle landing nettement meilleure (sections preuve sociale, FAQ, double CTA, accessibilité, honeypot anti-spam) ; conserve l'identité de marque et les décisions du cadrage (email-only, consentement non précoché, « pas une agence », aucun concurrent nommé).
+- **Conséquence** : la route serveur `/api/newsletter-subscribe` n'existe plus dans la version statique. Le formulaire tourne en `SIMULATE = true`. Pour le brancher : recréer une fonction serverless `/api` (réf. implémentation Next.js dans le commit `8780814`) puis passer `SIMULATE = false`.
+- **À compléter avant lancement** : adresse postale réelle (placeholder factice `1234 rue de la Montagne`), liens légaux `href="#"`, Tailwind compilé (CDN actuellement).
+- **Revenir en arrière** : `git revert` du commit de remplacement, ou `git checkout 8780814 -- .` pour restaurer la version Next.js recadrée.
+
 ---
 
 ## Points en suspens (non bloquants)
