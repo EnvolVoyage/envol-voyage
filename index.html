@@ -113,6 +113,17 @@
     </svg>
   </template>
 
+  <!-- Template de succes (clone par JS, pas de innerHTML) -->
+  <template id="success-tpl">
+    <div class="rounded-2xl bg-white shadow-lift border border-cyan/40 p-8 text-center" role="status">
+      <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-carmin shadow-seal mb-4">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M22 3 2.6 10.4c-.9.34-.83 1.65.1 1.9l6.4 1.7 1.7 6.4c.25.93 1.56 1 1.9.1L22 3Z" fill="#fff"/></svg>
+      </span>
+      <h3 class="font-display font-bold text-navy text-2xl">Bienvenue a bord!</h3>
+      <p class="mt-3 text-navy/75 max-w-sm mx-auto">Votre inscription est confirmee. Des qu'une vraie aubaine decolle du Quebec, elle atterrit dans votre boite courriel.</p>
+    </div>
+  </template>
+
   <!-- Skip link for keyboard / screen-reader users -->
   <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-3 focus:left-3 focus:bg-navy focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold">Aller au contenu</a>
 
@@ -597,16 +608,11 @@
       return res.json();
     }
 
-    // ---- État de succès (remplace le formulaire) -------------------------------
+    // ---- Etat de succes (remplace le formulaire via <template>, pas innerHTML) -
     function renderSuccess(container) {
-      container.innerHTML = `
-        <div class="rounded-2xl bg-white shadow-lift border border-cyan/40 p-8 text-center" role="status">
-          <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-carmin shadow-seal mb-4">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M22 3 2.6 10.4c-.9.34-.83 1.65.1 1.9l6.4 1.7 1.7 6.4c.25.93 1.56 1 1.9.1L22 3Z" fill="#fff"/></svg>
-          </span>
-          <h3 class="font-display font-bold text-navy text-2xl">Bienvenue à bord&nbsp;!</h3>
-          <p class="mt-3 text-navy/75 max-w-sm mx-auto">Votre inscription est confirmée. Dès qu'une vraie aubaine décolle du Québec, elle atterrit dans votre boîte courriel.</p>
-        </div>`;
+      var tpl = document.getElementById('success-tpl');
+      container.textContent = '';
+      container.appendChild(tpl.content.cloneNode(true));
     }
 
     // ---- Initialisation d'un formulaire ---------------------------------------
@@ -647,10 +653,14 @@
         }
         clearMessage(form);
 
-        // 3) Métadonnées finales
+        // 3) Metadonnees finales
         form.querySelector('[name="submitted_at"]').value = new Date().toISOString();
         const payload = Object.fromEntries(new FormData(form).entries());
         delete payload.website; // ne pas transmettre le honeypot
+
+        // Inclure le token Turnstile s'il existe
+        const turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
+        if (turnstileInput) payload['cf-turnstile-response'] = turnstileInput.value;
 
         // 4) Soumission
         const btn = form.querySelector('button[type="submit"]');
