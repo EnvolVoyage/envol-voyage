@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nous contacter — Envol Voyage</title>
+  <meta name="description" content="Une question, une suggestion? Contactez l'equipe d'Envol Voyage." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:'#F7F4EE', navy:'#1A2942', ink:'#0F1B2D', teal:'#76A5AF',
+            cyan:'#A3C1C7', carmin:'#BA1B2B', carmin2:'#9A1623', paper:'#FBF7EF', sand:'#ECE5D8',
+          },
+          fontFamily: { display:['Poppins','sans-serif'], sans:['Inter','sans-serif'] },
+          boxShadow: {
+            soft:'0 10px 30px -12px rgba(26,41,66,0.18), 0 4px 12px -6px rgba(26,41,66,0.10)',
+            lift:'0 24px 60px -20px rgba(26,41,66,0.30), 0 8px 20px -10px rgba(26,41,66,0.14)',
+          },
+          backgroundImage: {
+            'carmin-cta':'linear-gradient(135deg, #BA1B2B 0%, #9A1623 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family:'Inter',sans-serif; background-color:#F7F4EE; color:#1A2942;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+    h1,h2,h3,.font-display { font-family:'Poppins',sans-serif; }
+    h1,h2 { letter-spacing:-0.02em; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline:3px solid #76A5AF; outline-offset:2px; border-radius:6px;
+    }
+  </style>
+</head>
+<body class="antialiased text-[16px] leading-relaxed">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-cream/85 backdrop-blur-md border-b border-cyan/40">
+    <nav class="mx-auto max-w-6xl px-5 sm:px-8 h-[68px] flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-paper ring-1 ring-navy/10 shadow-soft overflow-hidden shrink-0">
+          <img src="assets/envol-mark.png" alt="" width="44" height="44" class="h-full w-full object-cover scale-110" />
+        </span>
+        <span class="font-display font-bold text-navy text-lg tracking-tight">Envol&nbsp;Voyage</span>
+      </a>
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a href="faq.html" class="font-semibold text-navy/80 hover:text-navy px-3 py-2 rounded-lg transition-colors">FAQ</a>
+        <a href="index.html#inscription" class="font-display font-semibold text-sm sm:text-base text-navy border border-navy/25 hover:bg-navy hover:text-white px-4 py-2 rounded-xl transition-colors duration-200 shadow-soft">S'inscrire</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-4xl px-5 sm:px-8 py-16 lg:py-24">
+      <a href="index.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-teal hover:text-navy transition-colors mb-8">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retour a l'accueil
+      </a>
+
+      <h1 class="font-display font-bold text-navy text-3xl sm:text-4xl tracking-tight">Nous contacter</h1>
+      <p class="mt-4 text-navy/70 text-lg max-w-xl">Une question, une suggestion, un probleme technique? On vous repond rapidement.</p>
+
+      <div class="mt-12 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
+
+        <!-- Formulaire de contact -->
+        <div class="rounded-2xl bg-paper border border-cyan/40 shadow-soft p-6 sm:p-8">
+          <h2 class="font-display font-semibold text-navy text-xl mb-6">Envoyez-nous un message</h2>
+          <form id="contact-form" novalidate>
+            <div class="space-y-5">
+              <div>
+                <label for="contact-name" class="block font-semibold text-navy mb-2 text-sm">Prenom</label>
+                <input id="contact-name" name="name" type="text" autocomplete="given-name" required
+                  placeholder="Votre prenom"
+                  class="w-full rounded-xl border border-navy/20 bg-cream/40 px-4 py-3 text-navy placeholder:text-navy/40 focus:bg-white focus:border-teal outline-none transition-colors" />
+              </div>
+              <div>
+                <label for="contact-email" class="block font-semibold text-navy mb-2 text-sm">Adresse courriel</label>
+                <input id="contact-email" name="email" type="email" inputmode="email" autocomplete="email" required
+                  placeholder="votre@courriel.com"
+                  class="w-full rounded-xl border border-navy/20 bg-cream/40 px-4 py-3 text-navy placeholder:text-navy/40 focus:bg-white focus:border-teal outline-none transition-colors" />
+              </div>
+              <div>
+                <label for="contact-message" class="block font-semibold text-navy mb-2 text-sm">Message</label>
+                <textarea id="contact-message" name="message" rows="5" required
+                  placeholder="Comment pouvons-nous vous aider?"
+                  class="w-full rounded-xl border border-navy/20 bg-cream/40 px-4 py-3 text-navy placeholder:text-navy/40 focus:bg-white focus:border-teal outline-none transition-colors resize-y"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="group relative mt-6 w-full overflow-hidden rounded-xl bg-carmin-cta px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft transition-all duration-200 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60">
+              <span class="relative z-10 inline-flex items-center justify-center gap-2">
+                Envoyer le message
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <p id="contact-msg" class="mt-3 text-sm font-medium hidden" role="alert"></p>
+          </form>
+        </div>
+
+        <!-- Informations de contact -->
+        <div class="space-y-8">
+
+          <div class="rounded-2xl bg-paper border border-cyan/40 shadow-soft p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal/15 border border-teal/30">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z" stroke="#76A5AF" stroke-width="1.8"/><path d="m22 6-10 7L2 6" stroke="#76A5AF" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              </span>
+              <h3 class="font-display font-semibold text-navy">Courriel</h3>
+            </div>
+            <a href="mailto:info@envolvoyage.com" class="text-teal font-medium hover:text-navy transition-colors underline underline-offset-2">info@envolvoyage.com</a>
+            <p class="mt-2 text-sm text-navy/60">On repond generalement en moins de 48 heures.</p>
+          </div>
+
+          <div class="rounded-2xl bg-paper border border-cyan/40 shadow-soft p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal/15 border border-teal/30">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="#76A5AF" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="#76A5AF" stroke-width="1.8"/></svg>
+              </span>
+              <h3 class="font-display font-semibold text-navy">Adresse</h3>
+            </div>
+            <address class="not-italic text-navy/75 leading-relaxed text-sm">
+              Envol Voyage<br />
+              1234, rue de la Montagne, bureau 200<br />
+              Montreal (Quebec) H3G 1Z2<br />
+              Canada
+            </address>
+          </div>
+
+          <div class="rounded-2xl bg-paper border border-cyan/40 shadow-soft p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal/15 border border-teal/30">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#76A5AF" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#76A5AF" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <h3 class="font-display font-semibold text-navy">Disponibilite</h3>
+            </div>
+            <p class="text-navy/75 text-sm leading-relaxed">Lundi au vendredi, 9h a 17h (heure de l'Est).<br />Les courriels recus en dehors de ces heures seront traites le jour ouvrable suivant.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy text-cyan border-t border-white/10">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-12">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 3 2.6 10.4c-.9.34-.83 1.65.1 1.9l6.4 1.7 1.7 6.4c.25.93 1.56 1 1.9.1L22 3Z" fill="#A3C1C7"/><path d="M22 3 9.2 14l1.5 6.5c.25.93 1.56 1 1.9.1L22 3Z" fill="#76A5AF"/></svg>
+          </span>
+          <span class="font-display font-bold text-cream text-lg">Envol&nbsp;Voyage</span>
+        </a>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href="politique-de-confidentialite.html" class="hover:text-cream transition-colors py-1">Confidentialite</a>
+          <a href="conditions-utilisation.html" class="hover:text-cream transition-colors py-1">Conditions</a>
+          <a href="contact.html" class="text-cream font-medium py-1">Nous contacter</a>
+        </nav>
+      </div>
+      <p class="mt-10 text-sm text-cyan/60">&copy; 2026 Envol Voyage. Tous droits reserves.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+    const form = document.getElementById('contact-form');
+    const msg = document.getElementById('contact-msg');
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = form.querySelector('[name="name"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const message = form.querySelector('[name="message"]').value.trim();
+
+      if (!name) { showMsg('Veuillez entrer votre prenom.', 'error'); return; }
+      if (!EMAIL_RE.test(email)) { showMsg('Veuillez entrer une adresse courriel valide.', 'error'); return; }
+      if (!message) { showMsg('Veuillez ecrire un message.', 'error'); return; }
+
+      // Ouvrir le client courriel avec les infos pre-remplies
+      var subject = encodeURIComponent('Message de ' + name + ' via envolvoyage.com');
+      var body = encodeURIComponent(message + '\n\n---\nDe : ' + name + ' (' + email + ')');
+      window.location.href = 'mailto:info@envolvoyage.com?subject=' + subject + '&body=' + body;
+
+      showMsg('Votre client courriel devrait s\'ouvrir. Si ce n\'est pas le cas, ecrivez-nous directement a info@envolvoyage.com.', 'success');
+    });
+
+    function showMsg(text, type) {
+      msg.textContent = text;
+      msg.classList.remove('hidden', 'text-carmin', 'text-teal');
+      msg.classList.add(type === 'error' ? 'text-carmin' : 'text-teal');
+    }
+  })();
+  </script>
+</body>
+</html>

@@ -20,9 +20,11 @@
           colors: {
             cream:  '#F7F4EE',
             navy:   '#1A2942',
+            ink:    '#0F1B2D',
             teal:   '#76A5AF',
             cyan:   '#A3C1C7',
             carmin: '#BA1B2B',
+            carmin2:'#9A1623',
             paper:  '#FBF7EF',
             sand:   '#ECE5D8',
           },
@@ -34,6 +36,11 @@
             soft:  '0 10px 30px -12px rgba(26,41,66,0.18), 0 4px 12px -6px rgba(26,41,66,0.10)',
             lift:  '0 24px 60px -20px rgba(26,41,66,0.30), 0 8px 20px -10px rgba(26,41,66,0.14)',
             seal:  '0 2px 8px -1px rgba(186,27,43,0.45)',
+            glow:  '0 0 0 1px rgba(118,165,175,0.18), 0 18px 48px -24px rgba(26,41,66,0.45)',
+          },
+          backgroundImage: {
+            'sun-soft':  'radial-gradient(120% 120% at 80% 0%, rgba(163,193,199,0.35) 0%, rgba(247,244,238,0) 55%)',
+            'carmin-cta':'linear-gradient(135deg, #BA1B2B 0%, #9A1623 100%)',
           },
         },
       },
@@ -92,6 +99,57 @@
     .valid-check { opacity: 0; transform: scale(0.6); transition: opacity .2s ease, transform .2s ease; }
     .is-valid .valid-check { opacity: 1; transform: scale(1); }
 
+    /* Titres : un poil plus serres et nets sur grand ecran */
+    h1, h2 { letter-spacing: -0.02em; }
+    .text-balance { text-wrap: balance; }
+
+    /* Filet decoratif reutilisable sous les titres de section */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #76A5AF;
+    }
+    .eyebrow::before {
+      content: ""; width: 1.75rem; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, #BA1B2B, #76A5AF);
+    }
+
+    /* Témoignages — cartes postales */
+    .temoignages-toggle { cursor: pointer; }
+    .temoignages-toggle::-webkit-details-marker { display: none; }
+    .temoignages-toggle { list-style: none; }
+    details[open] .temoignages-chevron { transform: rotate(180deg); }
+    .temoignages-chevron { transition: transform 0.3s ease; }
+    details[open] .temoignages-body { animation: faqIn 0.4s ease; }
+
+    .ticket-notch {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 22px; height: 22px; border-radius: 50%; background: #ECE5D8;
+    }
+    .ticket-notch.left  { left: -11px; }
+    .ticket-notch.right { right: -11px; }
+
+    .postcard {
+      position: relative; background: #FBF7EF; border-radius: 6px;
+      padding: 30px 26px 24px; border: 1px solid rgba(26,41,66,0.05);
+      box-shadow: 0 2px 4px rgba(26,41,66,0.08), 0 18px 38px -16px rgba(26,41,66,0.32);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .postcard::before {
+      content: ""; position: absolute; inset: 8px;
+      border: 1px dashed rgba(26,41,66,0.14); border-radius: 3px; pointer-events: none;
+    }
+    .postcard:hover {
+      transform: rotate(0deg) translateY(-4px) !important;
+      box-shadow: 0 6px 10px rgba(26,41,66,0.1), 0 26px 50px -16px rgba(26,41,66,0.4);
+    }
+    .postcard-pin {
+      position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+      width: 16px; height: 16px; border-radius: 50%; background: #BA1B2B;
+      box-shadow: 0 3px 6px rgba(186,27,43,0.4), inset 0 -3px 4px rgba(0,0,0,0.2), inset 0 3px 3px rgba(255,255,255,0.4);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .floaty { animation: none; }
@@ -142,7 +200,7 @@
 
       <!-- Right side: FAQ + S'inscrire (no leaky menu) -->
       <div class="flex items-center gap-2 sm:gap-4">
-        <a href="#faq" class="font-semibold text-navy/80 hover:text-navy px-3 py-2 rounded-lg transition-colors">FAQ</a>
+        <a href="faq.html" class="font-semibold text-navy/80 hover:text-navy px-3 py-2 rounded-lg transition-colors">FAQ</a>
         <a href="#inscription" class="font-display font-semibold text-sm sm:text-base text-navy border border-navy/25 hover:bg-navy hover:text-white px-4 py-2 rounded-xl transition-colors duration-200 shadow-soft">S'inscrire</a>
       </div>
     </nav>
@@ -152,7 +210,7 @@
     <!-- ============================================================= -->
     <!-- HERO                                                          -->
     <!-- ============================================================= -->
-    <section id="inscription" class="relative overflow-hidden" style="scroll-margin-top: var(--header-h);">
+    <section id="inscription" class="relative overflow-hidden bg-sun-soft" style="scroll-margin-top: var(--header-h);">
       <!-- soft ambient glow -->
       <div aria-hidden="true" class="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-cyan/30 blur-3xl"></div>
       <div aria-hidden="true" class="pointer-events-none absolute top-40 -left-32 h-80 w-80 rounded-full bg-teal/20 blur-3xl"></div>
@@ -197,7 +255,7 @@
                 <label class="mt-4 flex items-start gap-3 cursor-pointer select-none">
                   <input type="checkbox" name="consent_marketing" required
                     class="mt-0.5 h-5 w-5 shrink-0 rounded border-navy/30 text-carmin accent-carmin focus:ring-2 focus:ring-teal cursor-pointer" />
-                  <span class="text-sm text-navy/75 leading-snug">J'accepte de recevoir les aubaines par courriel et la <a href="#" class="underline decoration-teal underline-offset-2 hover:text-navy font-medium">Politique de confidentialité</a>.</span>
+                  <span class="text-sm text-navy/75 leading-snug">J'accepte de recevoir les aubaines par courriel et la <a href="politique-de-confidentialite.html" class="underline decoration-teal underline-offset-2 hover:text-navy font-medium">Politique de confidentialite</a>.</span>
                 </label>
 
                 <!-- Honeypot anti-bot (laisser vide) -->
@@ -218,8 +276,11 @@
                 <!-- Emplacement Turnstile / reCAPTCHA (à activer en production) -->
                 <div class="cf-turnstile mt-3" data-sitekey="VOTRE_CLE_PUBLIQUE_ICI" hidden></div>
 
-                <button type="submit" class="cta mt-4 w-full rounded-xl bg-carmin px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft hover:brightness-110 active:translate-y-px transition disabled:opacity-60">
-                  M'inscrire gratuitement
+                <button type="submit" class="cta group relative mt-4 w-full overflow-hidden rounded-xl bg-carmin-cta px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft transition-all duration-200 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:hover:translate-y-0">
+                  <span class="cta-label relative z-10 inline-flex items-center justify-center gap-2">
+                    M'inscrire gratuitement
+                    <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </button>
 
                 <p class="mt-3 text-center text-sm text-navy/55">100&nbsp;% gratuit. Désabonnement en un clic.</p>
@@ -344,6 +405,104 @@
     </section>
 
     <!-- ============================================================= -->
+    <!-- TÉMOIGNAGES + STATS (cartes postales — clic pour révéler)     -->
+    <!-- ============================================================= -->
+    <section class="bg-sand/55 border-y border-cyan/40">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8 py-16 lg:py-20">
+        <details class="group">
+          <summary class="temoignages-toggle flex items-center justify-between gap-4 select-none">
+            <div>
+              <p class="eyebrow">Cartes postales de nos abonnés</p>
+              <h2 class="mt-2 font-display font-bold text-navy text-3xl sm:text-4xl tracking-tight">Des mots qui voyagent bien</h2>
+              <p class="mt-3 text-navy/70 text-lg">Cliquez pour lire ce que nos abonnés en pensent.</p>
+            </div>
+            <span class="temoignages-chevron shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-full bg-paper border border-cyan/40 shadow-soft">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+
+          <div class="temoignages-body mt-10">
+            <!-- Billet d'embarquement — bandeau de stats -->
+            <div class="relative flex items-center bg-paper rounded-2xl shadow-soft ring-1 ring-navy/10 px-4 py-6">
+              <div class="flex-1 text-center px-5">
+                <p class="font-display font-bold text-[2.25rem] leading-none tracking-tight text-navy">12&nbsp;400+</p>
+                <p class="mt-2 text-sm text-navy/60">voyageurs abonnés</p>
+              </div>
+              <span class="w-0 self-stretch border-l-2 border-dashed border-navy/20 mx-1" aria-hidden="true"></span>
+              <div class="flex-1 text-center px-5">
+                <p class="font-display font-bold text-[2.25rem] leading-none tracking-tight text-carmin">340&nbsp;$</p>
+                <p class="mt-2 text-sm text-navy/60">économie moyenne / aubaine</p>
+              </div>
+              <span class="w-0 self-stretch border-l-2 border-dashed border-navy/20 mx-1" aria-hidden="true"></span>
+              <div class="flex-1 text-center px-5">
+                <p class="font-display font-bold text-[2.25rem] leading-none tracking-tight text-navy">1</p>
+                <p class="mt-2 text-sm text-navy/60">alerte par semaine</p>
+              </div>
+              <span class="ticket-notch left" aria-hidden="true"></span>
+              <span class="ticket-notch right" aria-hidden="true"></span>
+            </div>
+
+            <!-- Mur de cartes postales -->
+            <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 px-2">
+
+              <!-- Carte postale 1 — Marie-Pier -->
+              <figure class="postcard" style="transform: rotate(-2.2deg);">
+                <span class="postcard-pin" aria-hidden="true"></span>
+                <div class="absolute top-4 right-4 w-[52px] h-[60px] rounded bg-cyan/40 flex flex-col items-center justify-center gap-0.5 outline-dotted outline-3 outline-paper outline-offset-[-3px]" aria-hidden="true">
+                  <span class="font-display font-bold text-sm text-navy">YUL</span>
+                  <span class="font-sans font-semibold text-[6.5px] tracking-wider text-navy/75">PAR AVION</span>
+                </div>
+                <blockquote class="text-[16.5px] leading-relaxed font-medium text-navy mt-4 mr-10">
+                  «&nbsp;J'ai payé mon vol Montréal&ndash;Lisbonne 412&nbsp;$ aller-retour. Mes collègues capotaient.&nbsp;»
+                </blockquote>
+                <figcaption class="mt-5 flex flex-col leading-snug">
+                  <span class="font-display font-semibold text-[15px] text-navy">Marie-Pier L.</span>
+                  <span class="text-[13px] font-medium text-teal">Québec</span>
+                </figcaption>
+                <p class="mt-3.5 text-[13px] text-carmin tracking-widest leading-none" aria-label="5 étoiles sur 5">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              </figure>
+
+              <!-- Carte postale 2 — Simon -->
+              <figure class="postcard" style="transform: rotate(1.6deg);">
+                <span class="postcard-pin" aria-hidden="true"></span>
+                <div class="absolute top-4 right-4 w-[52px] h-[60px] rounded bg-cyan/40 flex flex-col items-center justify-center gap-0.5 outline-dotted outline-3 outline-paper outline-offset-[-3px]" aria-hidden="true">
+                  <span class="font-display font-bold text-sm text-navy">YUL</span>
+                  <span class="font-sans font-semibold text-[6.5px] tracking-wider text-navy/75">PAR AVION</span>
+                </div>
+                <blockquote class="text-[16.5px] leading-relaxed font-medium text-navy mt-4 mr-10">
+                  «&nbsp;Une alerte le mardi matin, réservé le midi. Cancún à 250&nbsp;$, c'est du jamais vu.&nbsp;»
+                </blockquote>
+                <figcaption class="mt-5 flex flex-col leading-snug">
+                  <span class="font-display font-semibold text-[15px] text-navy">Simon T.</span>
+                  <span class="text-[13px] font-medium text-teal">Trois-Rivières</span>
+                </figcaption>
+                <p class="mt-3.5 text-[13px] text-carmin tracking-widest leading-none" aria-label="5 étoiles sur 5">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              </figure>
+
+              <!-- Carte postale 3 — Geneviève -->
+              <figure class="postcard" style="transform: rotate(-1.3deg);">
+                <span class="postcard-pin" aria-hidden="true"></span>
+                <div class="absolute top-4 right-4 w-[52px] h-[60px] rounded bg-cyan/40 flex flex-col items-center justify-center gap-0.5 outline-dotted outline-3 outline-paper outline-offset-[-3px]" aria-hidden="true">
+                  <span class="font-display font-bold text-sm text-navy">YUL</span>
+                  <span class="font-sans font-semibold text-[6.5px] tracking-wider text-navy/75">PAR AVION</span>
+                </div>
+                <blockquote class="text-[16.5px] leading-relaxed font-medium text-navy mt-4 mr-10">
+                  «&nbsp;Zéro spam, juste les vraies bonnes affaires. Exactement ce que ça promet.&nbsp;»
+                </blockquote>
+                <figcaption class="mt-5 flex flex-col leading-snug">
+                  <span class="font-display font-semibold text-[15px] text-navy">Geneviève D.</span>
+                  <span class="text-[13px] font-medium text-teal">Sherbrooke</span>
+                </figcaption>
+                <p class="mt-3.5 text-[13px] text-carmin tracking-widest leading-none" aria-label="5 étoiles sur 5">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              </figure>
+
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
     <!-- COMMENT ÇA MARCHE                                             -->
     <!-- ============================================================= -->
     <section class="border-y border-cyan/40 bg-sand/55">
@@ -421,7 +580,7 @@
             Comment ce service peut-il être gratuit ?
             <svg class="faq-chevron shrink-0 text-teal" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </summary>
-          <p class="faq-answer pb-5 -mt-1 text-navy/70">Notre mission est de bâtir une communauté de voyageurs informés. L'accès aux aubaines est gratuit.</p>
+          <p class="faq-answer pb-5 -mt-1 text-navy/70">Notre mission est de batir une communaute de voyageurs informes au Quebec. L'acces aux aubaines est et restera entierement gratuit, sans forfait premium ni frais caches.</p>
         </details>
 
         <details class="group rounded-2xl bg-paper border border-cyan/40 shadow-soft px-5 sm:px-6 open:shadow-lift transition-shadow">
@@ -429,17 +588,21 @@
             Vendez-vous les billets d'avion ?
             <svg class="faq-chevron shrink-0 text-teal" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </summary>
-          <p class="faq-answer pb-5 -mt-1 text-navy/70">Non. Envol Voyage est un service de curation d'information. L'achat se fait directement auprès des compagnies de confiance.</p>
+          <p class="faq-answer pb-5 -mt-1 text-navy/70">Non. Envol Voyage n'est pas une agence de voyage et ne vend aucun billet. Nous reperons les aubaines et vous redirigeons directement vers les sites officiels des compagnies aeriennes pour que vous reserviez vous-meme, en toute securite.</p>
         </details>
 
         <details class="group rounded-2xl bg-paper border border-cyan/40 shadow-soft px-5 sm:px-6 open:shadow-lift transition-shadow">
           <summary class="flex items-center justify-between gap-4 py-5 font-display font-semibold text-navy text-lg">
-            Combien de temps les aubaines sont-elles valides ?
+            Combien de courriels vais-je recevoir ?
             <svg class="faq-chevron shrink-0 text-teal" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="#76A5AF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </summary>
-          <p class="faq-answer pb-5 -mt-1 text-navy/70">Les tarifs aériens changent à la minute ; une aubaine peut expirer en quelques heures. La réactivité à nos courriels est donc cruciale.</p>
+          <p class="faq-answer pb-5 -mt-1 text-navy/70">Environ une alerte par semaine. On ne vous ecrit que lorsqu'on trouve une vraie aubaine qui en vaut la peine. Zero spam, zero remplissage.</p>
         </details>
       </div>
+
+      <p class="mt-8 text-center">
+        <a href="faq.html" class="font-semibold text-navy underline decoration-teal underline-offset-4 hover:text-carmin transition-colors">Voir toutes les questions &rarr;</a>
+      </p>
     </section>
 
     <!-- ============================================================= -->
@@ -468,7 +631,7 @@
               <label class="mt-4 flex items-start gap-3 cursor-pointer select-none">
                 <input type="checkbox" name="consent_marketing" required
                   class="mt-0.5 h-5 w-5 shrink-0 rounded border-navy/30 text-carmin accent-carmin focus:ring-2 focus:ring-teal cursor-pointer" />
-                <span class="text-sm text-navy/75 leading-snug">J'accepte de recevoir les aubaines par courriel et la <a href="#" class="underline decoration-teal underline-offset-2 hover:text-navy font-medium">Politique de confidentialité</a>.</span>
+                <span class="text-sm text-navy/75 leading-snug">J'accepte de recevoir les aubaines par courriel et la <a href="politique-de-confidentialite.html" class="underline decoration-teal underline-offset-2 hover:text-navy font-medium">Politique de confidentialite</a>.</span>
               </label>
 
               <div class="hp-field" aria-hidden="true">
@@ -485,8 +648,11 @@
               <input type="hidden" name="submitted_at" value="" />
               <div class="cf-turnstile mt-3" data-sitekey="VOTRE_CLE_PUBLIQUE_ICI" hidden></div>
 
-              <button type="submit" class="cta mt-4 w-full rounded-xl bg-carmin px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft hover:brightness-110 active:translate-y-px transition disabled:opacity-60">
-                M'inscrire gratuitement
+              <button type="submit" class="cta group relative mt-4 w-full overflow-hidden rounded-xl bg-carmin-cta px-6 py-3.5 font-display font-semibold text-white text-base shadow-soft transition-all duration-200 hover:shadow-lift hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:hover:translate-y-0">
+                <span class="cta-label relative z-10 inline-flex items-center justify-center gap-2">
+                  M'inscrire gratuitement
+                  <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
               </button>
               <p class="mt-3 text-center text-sm text-navy/55">100&nbsp;% gratuit. Désabonnement en un clic.</p>
               <p id="msg-cta" class="form-msg mt-2 text-sm font-medium hidden" role="alert"></p>
@@ -510,9 +676,9 @@
           <span class="font-display font-bold text-cream text-lg">Envol&nbsp;Voyage</span>
         </a>
         <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label="Liens légaux">
-          <a href="#" class="hover:text-cream transition-colors py-1">Politique de confidentialité</a>
-          <a href="#" class="hover:text-cream transition-colors py-1">Conditions d'utilisation</a>
-          <a href="#" class="hover:text-cream transition-colors py-1">Nous contacter</a>
+          <a href="politique-de-confidentialite.html" class="hover:text-cream transition-colors py-1">Politique de confidentialite</a>
+          <a href="conditions-utilisation.html" class="hover:text-cream transition-colors py-1">Conditions d'utilisation</a>
+          <a href="contact.html" class="hover:text-cream transition-colors py-1">Nous contacter</a>
         </nav>
       </div>
 
@@ -664,9 +830,11 @@
 
         // 4) Soumission
         const btn = form.querySelector('button[type="submit"]');
-        const original = btn.textContent;
+        const labelSpan = btn.querySelector('.cta-label');
+        const original = labelSpan ? labelSpan.textContent : btn.textContent;
         btn.disabled = true;
-        btn.textContent = 'Inscription en cours…';
+        if (labelSpan) { labelSpan.textContent = 'Inscription en cours\u2026'; }
+        else { btn.textContent = 'Inscription en cours\u2026'; }
 
         try {
           await subscribeToMailerLite(payload);
@@ -674,8 +842,9 @@
           renderSuccess(container || form.parentElement);
         } catch (err) {
           btn.disabled = false;
-          btn.textContent = original;
-          showMessage(form, 'Une erreur est survenue. Veuillez réessayer dans un instant.', 'error');
+          if (labelSpan) { labelSpan.textContent = original; }
+          else { btn.textContent = original; }
+          showMessage(form, 'Une erreur est survenue. Veuillez r\u00e9essayer dans un instant.', 'error');
         }
       });
     }
